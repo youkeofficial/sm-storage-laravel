@@ -9,7 +9,7 @@ Laravel Flysystem adapter for [SmStorage](https://votre-saas.com) — store and 
 
 ## Installation
 ```bash
-composer require youkeofficial/sm-storage-laravel
+composer require youkeofficial/sm-storage-laravel:dev-main
 ```
 
 The service provider is auto-discovered by Laravel.
@@ -68,4 +68,4 @@ SSL verification is automatically disabled when `APP_ENV=local` to allow testing
 
 ## License
 
-MIT
+MIT
