@@ -1,5 +1,5 @@
 {
-    "name": "youke/sm-storage-laravel",
+    "name": "youkeofficial/sm-storage-laravel",
     "description": "Laravel Flysystem adapter for SmStorage SaaS",
     "type": "library",
     "license": "MIT",

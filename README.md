@@ -9,7 +9,7 @@ Laravel Flysystem adapter for [SmStorage](https://votre-saas.com) — store and 
 
 ## Installation
 ```bash
-composer require youke/sm-storage-laravel
+composer require youkeofficial/sm-storage-laravel
 ```
 
 The service provider is auto-discovered by Laravel.
