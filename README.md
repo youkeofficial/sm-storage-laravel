@@ -1,22 +1,34 @@
 # SmStorage Laravel Adapter
 
-Laravel Flysystem adapter for [SmStorage](https://votre-saas.com) — store and serve files via the SmStorage SaaS API.
+Laravel Flysystem adapter for [SmStorage](https://storage.realyuuke.tech) — store and serve files via the SmStorage SaaS API.
 
 ## Requirements
 
-- PHP ^8.1
-- Laravel 10, 11 or 12
+- PHP ^8.2
+- Laravel 10, 11, 12 or 13
 
 ## Installation
+
+Add the repository to your project's `composer.json`:
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/youkeofficial/sm-storage-laravel"
+    }
+],
+```
+
+Then install the package:
+
 ```bash
 composer require youkeofficial/sm-storage-laravel:dev-main
 ```
 
-The service provider is auto-discovered by Laravel.
-
 ## Configuration
 
-**1. Create the configuration file (optional):**
+**1. Create the configuration file:**
 ```bash
 php artisan vendor:publish --tag=sm-storage-config
 ```
@@ -28,26 +40,23 @@ php artisan vendor:publish --tag=sm-storage-config
         'driver'    => 'sm',
         'key'       => env('REALYUUKE_STORAGE_MANAGER_API_KEY'),
         'bucket_id' => env('REALYUUKE_STORAGE_MANAGER_BUCKET_ID'),
-        'endpoint'  => env('REALYUUKE_STORAGE_MANAGER_ENDPOINT'),
-        'url'       => env('REALYUUKE_STORAGE_MANAGER_URL'),
+        'endpoint'  => env('REALYUUKE_STORAGE_MANAGER_ENDPOINT', 'https://storage.realyuuke.tech'),
+        'url'       => env('REALYUUKE_STORAGE_MANAGER_URL', 'https://storage.realyuuke.tech/uploads'),
     ],
 ],
 ```
 
 **3. Setup your environment variables in `.env`:**
 ```env
-REALYUUKE_STORAGE_MANAGER_ENDPOINT=https://your-smstorage-instance.com
-REALYUUKE_STORAGE_MANAGER_URL=https://your-smstorage-instance.com/uploads
-REALYUUKE_STORAGE_MANAGER_API_KEY=your_api_key
-REALYUUKE_STORAGE_MANAGER_BUCKET_ID=your_bucket_id
+REALYUUKE_STORAGE_MANAGER_API_KEY=your_secret_api_key
+REALYUUKE_STORAGE_MANAGER_BUCKET_ID=your_bucket_uuid
 ```
 
 ## Usage
 ```php
 use Illuminate\Support\Facades\Storage;
 
-// Upload or Store a file
-// Note: The adapter currently uses the filename, subdirectories may be flattened depending on your SaaS setup.
+// Upload a file
 $path = $request->file('avatar')->store('avatars', 'sm');
 
 // Get the public URL
@@ -64,8 +73,9 @@ Storage::disk('sm')->delete($path);
 
 ## Local Development (SSL)
 
-SSL verification is automatically disabled when `APP_ENV=local` to allow testing with local dev environments using self-signed certificates.
+SSL verification is automatically disabled when `APP_ENV=local` to allow testing with local dev environments.
 
 ## License
 
 MIT
+
